@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad</title>
+    <meta name="description" content="Notepad digital premium yang modern, elegan, dan responsif.">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="tabs-container">
+                <div class="tabs" id="tabs">
+                    <!-- Tabs will be rendered here -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="editor-container">
+            <div class="notepad-paper">
+                <textarea id="editor" spellcheck="false" autofocus placeholder="Mulai menulis di sini..."></textarea>
+            </div>
+        </div>
+        
+        <div class="statusbar" id="statusbar">
+            <div class="status-left">
+                <span class="status-badge"><span id="word-count">0</span> kata</span>
+            </div>
+            <div class="status-right">
+                <div class="status-item">Ln <span id="ln">1</span>, Col <span id="col">1</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-backdrop" class="modal-backdrop"></div>
+
+    <!-- Rename Modal -->
+    <div id="modal-rename" class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Ubah Nama File</h3>
+        </div>
+        <div class="modal-body">
+            <input type="text" id="rename-input" class="modal-input" placeholder="Nama file baru..." autocomplete="off">
+        </div>
+        <div class="modal-actions">
+            <button id="btn-rename-cancel" class="secondary-btn">Batal</button>
+            <button id="btn-rename-save" class="primary-btn">Simpan</button>
+        </div>
+    </div>
+
+    <!-- Download Modal -->
+    <div id="modal-download" class="modal">
+        <div class="modal-header">
+            <h3 class="modal-title">Unduh File?</h3>
+        </div>
+        <div class="modal-body">
+            <p class="modal-desc">Apakah Anda yakin ingin mengunduh <strong id="download-filename"></strong>?</p>
+        </div>
+        <div class="modal-actions">
+            <button id="btn-download-cancel" class="secondary-btn">Batal</button>
+            <button id="btn-download-confirm" class="primary-btn">Unduh</button>
+        </div>
+    </div>
+
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <div class="floating-controls">
+        <div class="fab-group" id="fabGroup">
+            <div class="fab-options">
+                <button id="btn-new" class="fab-btn" title="Halaman Baru" aria-label="Halaman Baru">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <button id="btn-theme" class="fab-btn" title="Ubah Tema" aria-label="Ubah Tema">
+                    <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button id="btn-save" class="fab-btn" title="Unduh File" aria-label="Unduh File">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </button>
+            </div>
+            <button class="fab-btn main-fab" onclick="toggleMainFab()" aria-label="Menu">☰</button>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

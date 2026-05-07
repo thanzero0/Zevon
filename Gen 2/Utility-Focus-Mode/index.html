@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="cursor-glow" id="cursor-glow"></div>
+    
+    <div class="app-container" id="app-container">
+        <header>
+            <div class="brand">focus.<em>mode</em></div>
+        </header>
+
+        <main class="setup-area" id="setup-area">
+            <div class="focus-config">
+                <h1>Masuk ke Mode Fokus</h1>
+                <p>Singkirkan gangguan. Fokus pada apa yang penting.</p>
+                
+                <div class="timer-select">
+                    <button class="time-opt active" data-mins="25">25</button>
+                    <button class="time-opt" data-mins="50">50</button>
+                    <button class="time-opt" data-mins="90">90</button>
+                </div>
+
+                <button id="start-focus" class="focus-btn">AKTIFKAN SEKARANG</button>
+            </div>
+        </main>
+
+        <div class="focus-overlay" id="focus-overlay">
+            <div class="countdown" id="timer-display">25:00</div>
+            <div class="quote" id="focus-quote">Bekerjalah dalam diam, biarkan kesuksesanmu yang bersuara.</div>
+            
+            <div class="exit-instruction">
+                Tahan tombol <span class="exit-trigger" id="exit-btn">BATALKAN</span> untuk keluar
+            </div>
+            
+            <div class="exit-progress" id="exit-progress"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

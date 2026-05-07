@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Roboto+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Classic Calculator</title>
+</head>
+
+<body>
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="floating-controls">
+        <div class="fab-group" id="fabGroup">
+            <div class="fab-options">
+                <button class="fab-btn scientific-fab" onclick="toggleScientific()"
+                    aria-label="Toggle Scientific Mode">⚛</button>
+                <button class="fab-btn history-fab" onclick="toggleHistory()" aria-label="Toggle History">⟲</button>
+                
+                <div class="size-fab-container">
+                    <button class="fab-btn size-fab" onclick="toggleSizeMenu()" aria-label="Adjust Size">⤢</button>
+                    <div class="size-menu" id="sizeMenu">
+                        <button class="size-opt" onclick="setSize('mini')">Mini</button>
+                        <button class="size-opt active" onclick="setSize('medium')">Medium</button>
+                        <button class="size-opt" onclick="setSize('large')">Large</button>
+                        <button class="size-opt" onclick="setSize('desktop')">Desktop</button>
+                        <button class="size-opt" id="customSizeOpt" onclick="toggleCustomSize()">Custom</button>
+                    </div>
+
+                    <!-- Custom Size Panel -->
+                    <div class="custom-size-panel" id="customSizePanel">
+                        <div class="custom-theme-header">
+                            <span>Ukuran Custom</span>
+                            <button onclick="toggleCustomSize()">×</button>
+                        </div>
+                        <div class="custom-theme-body">
+                            <div class="color-row">
+                                <label>Lebar</label>
+                                <input type="range" id="size-width" min="250" max="600" value="320" oninput="applyCustomSize()">
+                            </div>
+                            <div class="color-row">
+                                <label>Skala</label>
+                                <input type="range" id="size-scale" min="0.5" max="1.5" step="0.05" value="1" oninput="applyCustomSize()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-fab-container">
+                    <button class="fab-btn theme-fab" onclick="toggleThemeMenu()" aria-label="Switch Theme">◐</button>
+                    <div class="theme-menu" id="themeMenu">
+                        <button class="theme-opt active" onclick="setTheme('dark')">Dark</button>
+                        <button class="theme-opt" onclick="setTheme('light')">Light</button>
+                        <button class="theme-opt" onclick="setTheme('neon')">Neon</button>
+                        <button class="theme-opt" onclick="setTheme('sunset')">Sunset</button>
+                        <button class="theme-opt" onclick="setTheme('cyberpunk')">Cyber</button>
+                        <button class="theme-opt" onclick="setTheme('forest')">Forest</button>
+                        <button class="theme-opt" onclick="setTheme('ocean')">Ocean</button>
+                        <button class="theme-opt" id="customThemeOpt" onclick="setTheme('custom')">Custom</button>
+                    </div>
+
+                    <!-- Custom Theme Editor (Moved inside container) -->
+                    <div class="custom-theme-panel" id="customThemePanel">
+                        <div class="custom-theme-header">
+                            <span>Editor Warna</span>
+                            <button onclick="toggleCustomEditor()">×</button>
+                        </div>
+                        <div class="custom-theme-body">
+                            <div class="color-row"><label>Background</label><input type="color" id="color-bg"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Calculator</label><input type="color" id="color-calc"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Display</label><input type="color" id="color-display"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Buttons</label><input type="color" id="color-btn"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Accent</label><input type="color" id="color-equal"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Clear</label><input type="color" id="color-clear"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Text</label><input type="color" id="color-text"
+                                    oninput="applyCustomTheme()"></div>
+                            <button class="save-theme-btn" onclick="saveCustomTheme()">Save Theme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="fab-btn main-fab" onclick="toggleMainFab()" aria-label="Menu">☰</button>
+        </div>
+    </div>
+
+    <!-- History Overlay -->
+    <div class="history-overlay" id="historyOverlay" onclick="toggleHistory()"></div>
+
+    <!-- History Panel -->
+    <div class="history-panel" id="historyPanel">
+        <div class="history-header">
+            <h3>History</h3>
+            <div class="btn-group">
+                <button class="clear-btn" onclick="clearHistory()">Clear All</button>
+                <button onclick="toggleHistory()">Close</button>
+            </div>
+        </div>
+        <div class="history-list" id="historyList"></div>
+    </div>
+
+    <div class="calculator">
+        <div class="display-container">
+            <div id="ans-display">Ans = 0</div>
+            <input type="text" id="display" readonly placeholder="0">
+        </div>
+        <div class="buttons">
+            <!-- First Row (Scientific only) -->
+            <button class="sci-only deg-rad" onclick="toggleDegRad()">Deg</button>
+            <button class="sci-only" data-value="!">x!</button>
+            <button data-value="(">(</button>
+            <button data-value=")">)</button>
+            <button data-value="%">%</button>
+            <button id="clear" data-value="c">AC</button>
+            <button class="sci-only inv-btn" onclick="toggleInv()">Inv</button>
+
+            <!-- Second Row -->
+            <button class="sci-only trig" data-value="sin">sin</button>
+            <button class="sci-only" data-value="ln">ln</button>
+            <button data-value="7">7</button>
+            <button data-value="8">8</button>
+            <button data-value="9">9</button>
+            <button data-value="/">÷</button>
+            <button class="sci-only" data-value="pi">π</button>
+
+            <!-- Third Row -->
+            <button class="sci-only trig" data-value="cos">cos</button>
+            <button class="sci-only" data-value="log">log</button>
+            <button data-value="4">4</button>
+            <button data-value="5">5</button>
+            <button data-value="6">6</button>
+            <button data-value="*">×</button>
+            <button class="sci-only" data-value="e">e</button>
+
+            <!-- Fourth Row -->
+            <button class="sci-only trig" data-value="tan">tan</button>
+            <button class="sci-only" data-value="sqrt">√</button>
+            <button data-value="1">1</button>
+            <button data-value="2">2</button>
+            <button data-value="3">3</button>
+            <button data-value="-">-</button>
+            <button class="sci-only" data-value="ans">Ans</button>
+
+            <!-- Fifth Row -->
+            <button class="sci-only" data-value="exp">EXP</button>
+            <button class="sci-only" data-value="pow">x<sup>y</sup></button>
+            <button data-value="0">0</button>
+            <button data-value=".">.</button>
+            <button class="equal" id="equal" data-value="Enter">=</button>
+            <button data-value="+">+</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

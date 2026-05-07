@@ -1,0 +1,204 @@
+:root {
+    --bg-color: #000000;
+    --surface-color: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #666666;
+    --accent-color: #ffffff;
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.cursor-glow {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+}
+
+.app-container {
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    position: relative;
+}
+
+header {
+    margin-bottom: 40px;
+    transition: var(--transition);
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.brand em { font-style: italic; opacity: 0.5; }
+
+.setup-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.focus-config {
+    text-align: center;
+    max-width: 400px;
+}
+
+.focus-config h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.focus-config p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+.timer-select {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.time-opt {
+    background: transparent;
+    border: 1px solid #333;
+    color: var(--text-secondary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.time-opt.active, .time-opt:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.05);
+}
+
+.focus-btn {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    border: none;
+    padding: 20px 40px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.focus-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 40px rgba(255,255,255,0.2);
+}
+
+/* Overlay */
+.focus-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.app-container.focusing .focus-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.app-container.focusing header,
+.app-container.focusing .setup-area {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.countdown {
+    font-size: 160px;
+    font-weight: 200;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.05em;
+    margin-bottom: 24px;
+}
+
+.quote {
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-secondary);
+    max-width: 600px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.exit-instruction {
+    position: absolute;
+    bottom: 60px;
+    font-size: 12px;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.exit-trigger {
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #222;
+    transition: var(--transition);
+}
+
+.exit-trigger:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.exit-progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: var(--text-primary);
+    width: 0%;
+    transition: width 0.1s linear;
+}

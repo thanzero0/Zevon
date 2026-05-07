@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do</title>
+    <meta name="description" content="Manage multiple to-do lists with a premium horizontal board experience.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="background-glow"></div>
+    <main class="boards-wrapper">
+        <div id="boards-container" class="boards-container">
+            <!-- Boards will be injected here -->
+
+        </div>
+    </main>
+
+    <div class="floating-controls">
+        <div class="fab-group" id="fabGroup">
+            <div class="fab-options">
+                <button id="add-board-btn" class="fab-btn" title="New Board" aria-label="New Board">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+            </div>
+            <button class="fab-btn main-fab" onclick="toggleMainFab()" aria-label="Menu">☰</button>
+        </div>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title">Delete Board?</h3>
+            <p id="modal-message">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="modal-cancel">Cancel</button>
+                <button id="modal-confirm" class="danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

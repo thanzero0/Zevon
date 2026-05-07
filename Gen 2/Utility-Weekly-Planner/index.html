@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="cursor-glow" id="cursor-glow"></div>
+    
+    <div class="app-container">
+        <header>
+            <div class="brand">weekly.<em>planner</em></div>
+            <div class="week-title" id="week-display">Minggu Ini</div>
+        </header>
+
+        <main class="planner-grid">
+            <div class="day-column" data-day="Mon">
+                <div class="day-header">Senin</div>
+                <div class="task-list" id="list-Mon"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Mon', this)">
+                </div>
+            </div>
+            <div class="day-column" data-day="Tue">
+                <div class="day-header">Selasa</div>
+                <div class="task-list" id="list-Tue"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Tue', this)">
+                </div>
+            </div>
+            <div class="day-column" data-day="Wed">
+                <div class="day-header">Rabu</div>
+                <div class="task-list" id="list-Wed"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Wed', this)">
+                </div>
+            </div>
+            <div class="day-column" data-day="Thu">
+                <div class="day-header">Kamis</div>
+                <div class="task-list" id="list-Thu"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Thu', this)">
+                </div>
+            </div>
+            <div class="day-column" data-day="Fri">
+                <div class="day-header">Jumat</div>
+                <div class="task-list" id="list-Fri"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Fri', this)">
+                </div>
+            </div>
+            <div class="day-column" data-day="Sat">
+                <div class="day-header">Sabtu</div>
+                <div class="task-list" id="list-Sat"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Sat', this)">
+                </div>
+            </div>
+            <div class="day-column" data-day="Sun">
+                <div class="day-header">Minggu</div>
+                <div class="task-list" id="list-Sun"></div>
+                <div class="add-task">
+                    <input type="text" placeholder="+ Tambah" onkeypress="if(event.key==='Enter') addTask('Sun', this)">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

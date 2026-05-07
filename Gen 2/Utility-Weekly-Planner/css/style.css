@@ -1,0 +1,156 @@
+:root {
+    --bg-color: #000000;
+    --surface-color: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #555555;
+    --accent-color: #ffffff;
+    --border-color: #222222;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+.cursor-glow {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+}
+
+.app-container {
+    padding: 60px 40px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.brand em { font-style: italic; opacity: 0.5; }
+
+.week-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+}
+
+.planner-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 16px;
+    height: 70vh;
+}
+
+.day-column {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.day-column:hover {
+    border-color: #333;
+}
+
+.day-header {
+    padding: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.task-list {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+}
+
+.task-item {
+    padding: 12px;
+    font-size: 13px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.task-item:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: #333;
+}
+
+.task-item.completed {
+    opacity: 0.3;
+    text-decoration: line-through;
+}
+
+.add-task {
+    padding: 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+.add-task input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    padding: 4px;
+}
+
+.add-task input::placeholder {
+    color: #333;
+}
+
+@media (max-width: 1200px) {
+    .planner-grid {
+        grid-template-columns: repeat(4, 1fr);
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .planner-grid {
+        grid-template-columns: 1fr;
+    }
+}

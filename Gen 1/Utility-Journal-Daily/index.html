@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Journal</title>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-theme="dark">
+    <div class="app-container">
+        <header>
+            <div class="brand"><em>daily</em> journal</div>
+            <div class="header-right">
+                <span id="date-display"></span>
+
+            </div>
+        </header>
+
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside>
+                <div class="sidebar-label">Daftar Entri</div>
+                <ul id="entries-list">
+                    <li class="empty-sidebar">Belum ada entri.</li>
+                </ul>
+            </aside>
+
+            <!-- Main area -->
+            <main>
+                <!-- Welcome -->
+                <div id="welcome">
+                    <div class="welcome-deco">✦</div>
+                    <h2>Selamat datang.</h2>
+                    <p>Tuliskan pikiranmu hari ini.</p>
+                </div>
+
+                <!-- Editor -->
+                <div id="entry-view" class="hidden">
+                    <div class="entry-toolbar">
+                        <div class="mood-row">
+                            <span class="meta-label">Mood</span>
+                            <div class="mood-btns">
+                                <button class="mood-btn" data-mood="😊" title="Bahagia" onclick="setMood(this)">😊</button>
+                                <button class="mood-btn" data-mood="😌" title="Tenang" onclick="setMood(this)">😌</button>
+                                <button class="mood-btn" data-mood="😐" title="Biasa" onclick="setMood(this)">😐</button>
+                                <button class="mood-btn" data-mood="😔" title="Sedih" onclick="setMood(this)">😔</button>
+                                <button class="mood-btn" data-mood="😤" title="Frustrasi" onclick="setMood(this)">😤</button>
+                            </div>
+                        </div>
+                        <div class="toolbar-actions">
+                            <button class="secondary-btn danger-text" onclick="deleteEntry()">Hapus</button>
+                            <button class="primary-btn" onclick="saveEntry()">Simpan</button>
+                        </div>
+                    </div>
+
+                    <div class="editor-content">
+                        <textarea id="entry-title" rows="1" placeholder="Judul entri…" oninput="autoResize(this); updateMeta();"></textarea>
+                        <div class="entry-meta-line">
+                            <span id="meta-date">—</span>
+                            <span class="meta-dot"></span>
+                            <span id="meta-words">0 kata</span>
+                            <span id="meta-mood-line"></span>
+                        </div>
+                        <textarea id="entry-body" placeholder="Mulai menulis… apa yang kamu rasakan hari ini?" oninput="updateMeta();"></textarea>
+                    </div>
+                </div>
+
+                <!-- Read view -->
+                <div id="read-view" class="hidden">
+                    <div class="entry-toolbar">
+                        <div></div>
+                        <div class="toolbar-actions">
+                            <button class="secondary-btn" onclick="editCurrent()">Edit</button>
+                            <button class="secondary-btn danger-text" onclick="deleteEntry()">Hapus</button>
+                        </div>
+                    </div>
+                    <div class="read-content">
+                        <h1 id="rv-title"></h1>
+                        <div class="rv-meta">
+                            <span id="rv-date"></span>
+                            <span class="meta-dot"></span>
+                            <span id="rv-words"></span>
+                            <span class="rv-mood" id="rv-mood"></span>
+                        </div>
+                        <div id="rv-body"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <div class="floating-controls">
+        <div class="fab-group" id="fabGroup">
+            <div class="fab-options">
+                <button class="fab-btn" onclick="newEntry()" aria-label="Entri Baru" title="Entri Baru">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+            </div>
+            <button class="fab-btn main-fab" onclick="toggleMainFab()" aria-label="Menu">☰</button>
+        </div>
+    </div>
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

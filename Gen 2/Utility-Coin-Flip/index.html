@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision Maker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="cursor-glow" id="cursor-glow"></div>
+    
+    <div class="app-container">
+        <header>
+            <div class="brand">decision.<em>maker</em></div>
+        </header>
+
+        <main class="flip-area">
+            <div class="input-container">
+                <div class="option-box">
+                    <span class="label">Pilihan A</span>
+                    <input type="text" id="option-a" placeholder="YES" autocomplete="off">
+                </div>
+                <div class="vs">VS</div>
+                <div class="option-box">
+                    <span class="label">Pilihan B</span>
+                    <input type="text" id="option-b" placeholder="NO" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="coin-wrapper">
+                <div class="coin" id="coin">
+                    <div class="side heads">
+                        <span id="side-a-text">YES</span>
+                    </div>
+                    <div class="side tails">
+                        <span id="side-b-text">NO</span>
+                    </div>
+                </div>
+            </div>
+
+            <button id="flip-btn" class="flip-btn">FLIP COIN</button>
+            
+            <div class="result-display" id="result-text">Tentukan pilihanmu.</div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

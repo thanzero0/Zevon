@@ -11,7 +11,216 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Classic Calculator</title>
-</head>
+<style>
+/* FAB Theme Switcher & Control Buttons */
+.floating-controls {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1001;
+}
+
+.fab-group {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.fab-options {
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    border-radius: 40px;
+    backdrop-filter: blur(10px);
+    margin-left: 15px;
+    transform-origin: left center;
+}
+
+.fab-group.active .fab-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+}
+
+.fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-color, #ffffff);
+    color: var(--bg-color, #000000);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.main-fab {
+    z-index: 2;
+}
+
+.main-fab.status-active {
+    transform: rotate(135deg);
+    background: var(--text-secondary, #888);
+}
+
+/* Menus & Panels */
+.theme-menu, .size-menu {
+    position: absolute;
+    bottom: calc(100% + 28px);
+    left: 0;
+    transform: translateY(15px);
+    background: var(--surface-color, #1a1a1a);
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: var(--shadow, 0 10px 30px rgba(0,0,0,0.5));
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    opacity: 0;
+    visibility: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 150px;
+    z-index: 1000;
+}
+
+.theme-menu.active, .size-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.theme-opt, .size-opt {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-primary, #ffffff);
+    border: none;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.theme-opt:hover, .size-opt:hover {
+    background: var(--border-color, #333);
+}
+
+.theme-opt.active, .size-opt.active {
+    background: var(--accent-color, #ffffff);
+    color: var(--bg-color, #000000);
+}
+
+/* Custom Panel Base Styles */
+.custom-theme-panel, .custom-size-panel {
+    position: absolute;
+    bottom: calc(100% + 28px);
+    left: 0;
+    background: var(--surface-color, #1a1a1a);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--shadow, 0 10px 30px rgba(0,0,0,0.5));
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    width: 240px;
+    z-index: 1002;
+    animation: fadeInCustom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(15px);
+}
+
+.custom-theme-panel.active, .custom-size-panel.active {
+    display: flex;
+}
+
+.custom-theme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-theme-header span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary, #ffffff);
+}
+
+.custom-theme-header button {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #888);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.custom-theme-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.color-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.color-row label {
+    font-size: 12px;
+    color: var(--text-secondary, #888);
+}
+
+.color-row input[type="color"] {
+    width: 40px;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: none;
+}
+
+.color-row input[type="range"] {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.save-theme-btn {
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent-color, #ffffff);
+    color: var(--bg-color, #000000);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@keyframes fadeInCustom {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>\\n</head>
 
 <body>
     <div class="cursor-glow" id="cursor-glow"></div>
@@ -162,6 +371,220 @@
     </div>
 
     <script src="js/script.js"></script>
-</body>
+<script>
+// --- Standard FAB Logic ---
+(function() {
+    const fabHTML = `
+        <div class="floating-controls">
+            <div class="fab-group" id="fabGroup">
+                <div class="fab-options">
+                    <button class="fab-btn home-fab" onclick="window.location.href='/home/than/Project/Personal Project/website/Zevon/index.html'" aria-label="Home">⌂</button>
+                    
+                    <div class="size-fab-container">
+                        <button class="fab-btn size-fab" id="sizeFabBtn" aria-label="Adjust Size">⤢</button>
+                        <div class="size-menu" id="sizeMenu">
+                            <button class="size-opt" data-size="small">Small</button>
+                            <button class="size-opt" data-size="medium">Medium</button>
+                            <button class="size-opt" data-size="large">Large</button>
+                            <button class="size-opt" id="customSizeOpt">Custom</button>
+                        </div>
+
+                        <div class="custom-size-panel" id="customSizePanel">
+                            <div class="custom-theme-header">
+                                <span>Ukuran Custom</span>
+                                <button id="closeSizePanel">×</button>
+                            </div>
+                            <div class="custom-theme-body">
+                                <div class="color-row">
+                                    <label>Lebar</label>
+                                    <input type="range" id="size-width" min="300" max="800" value="450">
+                                </div>
+                                <div class="color-row">
+                                    <label>Skala</label>
+                                    <input type="range" id="size-scale" min="0.5" max="1.5" step="0.05" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="theme-fab-container">
+                        <button class="fab-btn theme-fab" id="themeFabBtn" aria-label="Switch Theme">◐</button>
+                        <div class="theme-menu" id="themeMenu">
+                            <button class="theme-opt" data-theme="dark">Dark</button>
+                            <button class="theme-opt" data-theme="light">Light</button>
+                            <button class="theme-opt" data-theme="neon">Neon</button>
+                            <button class="theme-opt" data-theme="sunset">Sunset</button>
+                            <button class="theme-opt" data-theme="cyberpunk">Cyber</button>
+                            <button class="theme-opt" data-theme="forest">Forest</button>
+                            <button class="theme-opt" data-theme="ocean">Ocean</button>
+                            <button class="theme-opt" id="customThemeOpt" data-theme="custom">Custom</button>
+                        </div>
+
+                        <div class="custom-theme-panel" id="customThemePanel">
+                            <div class="custom-theme-header">
+                                <span>Editor Warna</span>
+                                <button id="closeThemePanel">×</button>
+                            </div>
+                            <div class="custom-theme-body">
+                                <div class="color-row"><label>Background</label><input type="color" id="color-bg"></div>
+                                <div class="color-row"><label>Surface</label><input type="color" id="color-surface"></div>
+                                <div class="color-row"><label>Text</label><input type="color" id="color-text"></div>
+                                <div class="color-row"><label>Accent</label><input type="color" id="color-accent"></div>
+                                <button class="save-theme-btn" id="saveCustomTheme">Save Theme</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="fab-btn main-fab" id="mainFabBtn" aria-label="Menu">☰</button>
+            </div>
+        </div>
+    `;
+
+    if (!document.getElementById('fabGroup')) {
+        document.body.insertAdjacentHTML('beforeend', fabHTML);
+    }
+
+    const fabGroup = document.getElementById("fabGroup");
+    const themeMenu = document.getElementById("themeMenu");
+    const sizeMenu = document.getElementById("sizeMenu");
+    const mainFabBtn = document.getElementById("mainFabBtn");
+    const themeFabBtn = document.getElementById("themeFabBtn");
+    const sizeFabBtn = document.getElementById("sizeFabBtn");
+    const customThemePanel = document.getElementById("customThemePanel");
+    const customSizePanel = document.getElementById("customSizePanel");
+
+    function toggleMainFab() {
+        fabGroup.classList.toggle("active");
+        mainFabBtn.classList.toggle("status-active");
+        if (!fabGroup.classList.contains("active")) {
+            themeMenu.classList.remove("active");
+            sizeMenu.classList.remove("active");
+            customThemePanel.classList.remove("active");
+            customSizePanel.classList.remove("active");
+        }
+    }
+
+    mainFabBtn.addEventListener('click', toggleMainFab);
+    themeFabBtn.addEventListener('click', () => {
+        themeMenu.classList.toggle("active");
+        sizeMenu.classList.remove("active");
+        customSizePanel.classList.remove("active");
+    });
+    sizeFabBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle("active");
+        themeMenu.classList.remove("active");
+        customThemePanel.classList.remove("active");
+    });
+
+    document.getElementById('closeThemePanel').onclick = () => customThemePanel.classList.remove("active");
+    document.getElementById('closeSizePanel').onclick = () => customSizePanel.classList.remove("active");
+
+    function setTheme(theme, isInitial = false) {
+        document.body.className = document.body.className.replace(/\\S+-theme/g, '').trim();
+        if (theme !== 'custom') {
+            document.body.classList.add(`${theme}-theme`);
+            customThemePanel.classList.remove('active');
+        } else {
+            loadCustomTheme();
+        }
+        localStorage.setItem(window.location.pathname + '-theme', theme);
+        if (!isInitial) themeMenu.classList.remove("active");
+    }
+
+    document.querySelectorAll('.theme-opt').forEach(opt => {
+        opt.onclick = () => {
+            if (opt.id === 'customThemeOpt') {
+                customThemePanel.classList.add('active');
+                themeMenu.classList.remove('active');
+            } else {
+                setTheme(opt.dataset.theme);
+            }
+        };
+    });
+
+    function setSize(size, isInitial = false) {
+        const root = document.documentElement;
+        const presets = {
+            'small': { width: '380px', scale: '0.9' },
+            'medium': { width: '450px', scale: '1' },
+            'large': { width: '650px', scale: '1.1' }
+        };
+        if (size === 'custom') {
+            loadCustomSize();
+        } else if (presets[size]) {
+            root.style.setProperty('--app-width', presets[size].width);
+            root.style.setProperty('--app-scale', presets[size].scale);
+            customSizePanel.classList.remove('active');
+        }
+        localStorage.setItem(window.location.pathname + '-size', size);
+        if (!isInitial) sizeMenu.classList.remove("active");
+    }
+
+    document.querySelectorAll('.size-opt').forEach(opt => {
+        opt.onclick = () => {
+            if (opt.id === 'customSizeOpt') {
+                customSizePanel.classList.add('active');
+                sizeMenu.classList.remove('active');
+            } else {
+                setSize(opt.dataset.size);
+            }
+        };
+    });
+
+    document.getElementById('saveCustomTheme').onclick = () => {
+        const themeData = {
+            bg: document.getElementById('color-bg').value,
+            surface: document.getElementById('color-surface').value,
+            text: document.getElementById('color-text').value,
+            accent: document.getElementById('color-accent').value
+        };
+        localStorage.setItem(window.location.pathname + '-custom-theme', JSON.stringify(themeData));
+        setTheme('custom');
+    };
+
+    function applyCustomSize() {
+        const width = document.getElementById('size-width').value;
+        const scale = document.getElementById('size-scale').value;
+        document.documentElement.style.setProperty('--app-width', width + 'px');
+        document.documentElement.style.setProperty('--app-scale', scale);
+        localStorage.setItem(window.location.pathname + '-custom-size', JSON.stringify({ width, scale }));
+    }
+
+    document.getElementById('size-width').oninput = applyCustomSize;
+    document.getElementById('size-scale').oninput = applyCustomSize;
+
+    function loadCustomTheme() {
+        const saved = localStorage.getItem(window.location.pathname + '-custom-theme');
+        if (saved) {
+            const data = JSON.parse(saved);
+            document.documentElement.style.setProperty('--bg-color', data.bg);
+            document.documentElement.style.setProperty('--surface-color', data.surface);
+            document.documentElement.style.setProperty('--text-primary', data.text);
+            document.documentElement.style.setProperty('--accent-color', data.accent);
+        }
+    }
+
+    function loadCustomSize() {
+        const saved = localStorage.getItem(window.location.pathname + '-custom-size');
+        if (saved) {
+            const { width, scale } = JSON.parse(saved);
+            document.documentElement.style.setProperty('--app-width', width + 'px');
+            document.documentElement.style.setProperty('--app-scale', scale);
+            document.getElementById('size-width').value = width;
+            document.getElementById('size-scale').value = scale;
+        }
+    }
+
+    // Initial Load
+    setTheme(localStorage.getItem(window.location.pathname + '-theme') || 'dark', true);
+    setSize(localStorage.getItem(window.location.pathname + '-size') || 'medium', true);
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#fabGroup')) {
+            if (fabGroup.classList.contains("active")) toggleMainFab();
+        }
+    });
+})();
+</script>\\n</body>
 
 </html>

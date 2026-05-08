@@ -409,3 +409,4 @@ body {
 [data-theme="light"] .moon-icon { display: block; }
 [data-theme="dark"] .sun-icon { display: block; }
 body:not([data-theme]) .sun-icon { display: block; }
+/* chore: maintenance pass #16 — 2026-05-08 23:33:44 */

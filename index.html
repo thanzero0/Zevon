@@ -122,9 +122,18 @@
         }
 
         .card-icon {
-            font-size: 40px;
+            font-size: 32px;
             margin-bottom: 20px;
             display: block;
+            color: var(--accent);
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .utility-card:hover .card-icon {
+            opacity: 1;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
         }
 
         /* Cursor Glow */
@@ -158,91 +167,85 @@
 
     <main class="grid-container">
         <section class="gen-section">
-            <h2 class="gen-title">Generation 1</h2>
+            <h2 class="gen-title">Generation 1 & 2</h2>
             <div class="utility-grid">
                 <a href="Gen 1/Utility-Calender/index.html" class="utility-card">
-                    <span class="card-icon">📅</span>
+                    <i data-lucide="calendar" class="card-icon"></i>
                     <h3>Calendar</h3>
                     <p>Modern, responsive digital calendar with theme and size customization.</p>
                 </a>
                 <a href="Gen 1/Utility-Calculator/index.html" class="utility-card">
-                    <span class="card-icon">🔢</span>
+                    <i data-lucide="calculator" class="card-icon"></i>
                     <h3>Calculator</h3>
                     <p>Clean scientific calculator with history and premium aesthetics.</p>
                 </a>
                 <a href="Gen 1/Utility-Clock/index.html" class="utility-card">
-                    <span class="card-icon">🕒</span>
+                    <i data-lucide="clock" class="card-icon"></i>
                     <h3>Clock</h3>
                     <p>Elegant analog and digital clock with multiple time zones.</p>
                 </a>
                 <a href="Gen 1/Utility-Notepad/index.html" class="utility-card">
-                    <span class="card-icon">📝</span>
+                    <i data-lucide="file-text" class="card-icon"></i>
                     <h3>Notepad</h3>
                     <p>Minimalist markdown-ready notepad for quick thoughts.</p>
                 </a>
                 <a href="Gen 1/Utility-To-Do-List/index.html" class="utility-card">
-                    <span class="card-icon">✅</span>
+                    <i data-lucide="check-circle" class="card-icon"></i>
                     <h3>To-Do List</h3>
                     <p>Productivity-focused task manager with drag-and-drop.</p>
                 </a>
                 <a href="Gen 1/Utility-Pomodoro/index.html" class="utility-card">
-                    <span class="card-icon">🍅</span>
+                    <i data-lucide="timer" class="card-icon"></i>
                     <h3>Pomodoro</h3>
                     <p>Focus timer designed for deep work sessions.</p>
                 </a>
                 <a href="Gen 1/Utility-Habit-Tracker/index.html" class="utility-card">
-                    <span class="card-icon">📊</span>
+                    <i data-lucide="line-chart" class="card-icon"></i>
                     <h3>Habit Tracker</h3>
                     <p>Visualize your progress and build consistent routines.</p>
                 </a>
                 <a href="Gen 1/Utility-Journal-Daily/index.html" class="utility-card">
-                    <span class="card-icon">📓</span>
+                    <i data-lucide="book-open" class="card-icon"></i>
                     <h3>Daily Journal</h3>
                     <p>A private space for your daily reflections and moods.</p>
                 </a>
-            </div>
-        </section>
-
-        <section class="gen-section">
-            <h2 class="gen-title">Generation 2</h2>
-            <div class="utility-grid">
                 <a href="Gen 2/Utility-Budget-Planner/index.html" class="utility-card">
-                    <span class="card-icon">💰</span>
+                    <i data-lucide="wallet" class="card-icon"></i>
                     <h3>Budget Planner</h3>
                     <p>Manage your finances with intuitive expense tracking.</p>
                 </a>
                 <a href="Gen 2/Utility-Weekly-Planner/index.html" class="utility-card">
-                    <span class="card-icon">🗓️</span>
+                    <i data-lucide="calendar-days" class="card-icon"></i>
                     <h3>Weekly Planner</h3>
                     <p>Plan your week ahead with a clean, grid-based interface.</p>
                 </a>
                 <a href="Gen 2/Utility-Goal-Tracker/index.html" class="utility-card">
-                    <span class="card-icon">🎯</span>
+                    <i data-lucide="target" class="card-icon"></i>
                     <h3>Goal Tracker</h3>
                     <p>Break down big dreams into actionable milestones.</p>
                 </a>
                 <a href="Gen 2/Utility-Focus-Mode/index.html" class="utility-card">
-                    <span class="card-icon">🧘</span>
+                    <i data-lucide="brain" class="card-icon"></i>
                     <h3>Focus Mode</h3>
                     <p>Ambient sounds and distraction-free workspace.</p>
                 </a>
                 <a href="Gen 2/Utility-Quote-Generator/index.html" class="utility-card">
-                    <span class="card-icon">💬</span>
+                    <i data-lucide="quote" class="card-icon"></i>
                     <h3>Quote Generator</h3>
                     <p>Daily inspiration to keep you motivated and centered.</p>
                 </a>
                 <a href="Gen 2/Utility-Coin-Flip/index.html" class="utility-card">
-                    <span class="card-icon">🪙</span>
+                    <i data-lucide="circle-dot" class="card-icon"></i>
                     <h3>Coin Flip</h3>
                     <p>Quick decision maker with realistic 3D animation.</p>
                 </a>
                 <a href="Gen 2/Utility-Button-Stressing/index.html" class="utility-card">
-                    <span class="card-icon">🔘</span>
+                    <i data-lucide="mouse-pointer-2" class="card-icon"></i>
                     <h3>Button Stressing</h3>
                     <p>Satisfying interactive playground for stress relief.</p>
                 </a>
                 <a href="Gen 2/Utility-Popup-Stressing/index.html" class="utility-card">
-                    <span class="card-icon">🪟</span>
+                    <i data-lucide="layers" class="card-icon"></i>
                     <h3>Popup Stressing</h3>
                     <p>Chaotic yet controlled window management challenge.</p>
                 </a>
@@ -250,12 +253,17 @@
         </section>
     </main>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         const cursorGlow = document.getElementById('cursor-glow');
         window.addEventListener('mousemove', (e) => {
             cursorGlow.style.left = `${e.clientX}px`;
             cursorGlow.style.top = `${e.clientY}px`;
         });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
+<!-- thermal refinement 1 -->

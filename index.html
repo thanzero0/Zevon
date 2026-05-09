@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zevon - Premium Utility Suite</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #050505;
@@ -43,7 +46,16 @@
             letter-spacing: -2px;
             background: linear-gradient(135deg, #fff 0%, #888 100%);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .header h1:hover {
+            transform: scale(1.02);
+            filter: brightness(1.2);
         }
 
         .header p {
@@ -79,7 +91,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .utility-grid {
@@ -90,7 +102,7 @@
 
         .utility-card {
             background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
             padding: 30px;
             text-decoration: none;
@@ -102,9 +114,10 @@
 
         .utility-card:hover {
             transform: translateY(-10px);
-            background: #151515;
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: linear-gradient(145deg, #151515, #0f0f0f);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+                        inset 0 0 20px rgba(255, 255, 255, 0.02);
         }
 
         .utility-card h3 {
@@ -122,7 +135,8 @@
         }
 
         .card-icon {
-            font-size: 32px;
+            width: 32px;
+            height: 32px;
             margin-bottom: 20px;
             display: block;
             color: var(--accent);
@@ -133,7 +147,7 @@
         .utility-card:hover .card-icon {
             opacity: 1;
             transform: scale(1.1);
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
         }
 
         /* Cursor Glow */
@@ -143,7 +157,7 @@
             left: 0;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             z-index: -1;
@@ -152,11 +166,17 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 48px; }
-            .utility-grid { grid-template-columns: 1fr; }
+            .header h1 {
+                font-size: 48px;
+            }
+
+            .utility-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="cursor-glow" id="cursor-glow"></div>
 
@@ -265,6 +285,7 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>
 <!-- thermal refinement 1 -->
 <!-- thermal refinement 2 -->

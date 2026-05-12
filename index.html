@@ -18,6 +18,13 @@
             --text: #ffffff;
             --text-dim: #888888;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
@@ -33,18 +40,24 @@
         }
 
         .header {
-            padding: 80px 20px 40px;
+            padding: 120px 20px 60px;
             text-align: center;
             max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .header h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 64px;
+            font-size: clamp(48px, 10vw, 84px);
             font-weight: 800;
             margin: 0;
-            letter-spacing: -2px;
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, #fff 0%, #444 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -60,94 +73,140 @@
 
         .header p {
             color: var(--text-dim);
-            font-size: 18px;
-            margin-top: 15px;
+            font-size: clamp(16px, 2vw, 20px);
+            margin-top: 20px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         .grid-container {
             width: 100%;
-            max-width: 1200px;
-            padding: 40px 20px;
+            max-width: 1300px;
+            padding: 40px 24px 100px;
         }
 
         .gen-section {
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .gen-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .gen-title::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
         }
 
         .utility-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
         }
 
         .utility-card {
-            background: var(--surface);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 30px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 40px;
             text-decoration: none;
             color: inherit;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .utility-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent);
+            opacity: 0;
+            transition: var(--transition);
         }
 
         .utility-card:hover {
-            transform: translateY(-10px);
-            background: linear-gradient(145deg, #151515, #0f0f0f);
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
-                        inset 0 0 20px rgba(255, 255, 255, 0.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .utility-card:hover::before {
+            opacity: 1;
         }
 
         .utility-card h3 {
             font-family: 'Outfit', sans-serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 600;
-            margin: 0 0 10px;
+            margin: 0 0 12px;
+            letter-spacing: -0.5px;
         }
 
         .utility-card p {
             color: var(--text-dim);
-            font-size: 14px;
+            font-size: 15px;
             margin: 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .card-icon {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 20px;
+            width: 36px;
+            height: 36px;
+            margin-bottom: 24px;
             display: block;
             color: var(--accent);
-            opacity: 0.8;
+            opacity: 0.9;
             transition: var(--transition);
         }
 
         .utility-card:hover .card-icon {
-            opacity: 1;
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+            transform: scale(1.1) rotate(-5deg);
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+        }
+
+        
+        .search-container {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 100;
+        }
+
+        #utility-search {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 12px 24px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            width: 240px;
+        }
+
+        #utility-search:focus {
+            width: 320px;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Cursor Glow */
@@ -155,23 +214,30 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             z-index: -1;
             transform: translate(-50%, -50%);
-            filter: blur(80px);
+            filter: blur(100px);
+            transition: opacity 0.3s ease;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 48px;
+            .header {
+                padding: 80px 24px 40px;
             }
-
+            
             .utility-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .utility-card {
+                padding: 32px;
+                border-radius: 24px;
             }
         }
     </style>
@@ -180,7 +246,11 @@
 <body>
     <div class="cursor-glow" id="cursor-glow"></div>
 
-    <header class="header">
+    
+    <div class="search-container">
+        <input type="text" id="utility-search" placeholder="Search utilities...">
+    </div>
+<header class="header">
         <h1>ZEVON</h1>
         <p>A Premium Suite of Minimalist Web Utilities</p>
     </header>

@@ -260,3 +260,24 @@ input:focus {
 }
 
 /* chore: maintenance pass #9 — 2026-05-08 23:33:44 */
+
+/* Global Responsiveness & Simplicity Patch */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+        justify-content: flex-start;
+        overflow-y: auto;
+    }
+    .calculator, .app-container, .clock-wrapper, .planner-grid {
+        width: 100% !important;
+        transform: scale(1) !important;
+        margin-top: 40px;
+    }
+    .buttons, .utility-grid {
+        gap: 8px !important;
+    }
+    button {
+        font-size: 14px !important;
+        height: 44px !important;
+    }
+}

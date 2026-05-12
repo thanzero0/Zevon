@@ -355,6 +355,24 @@
             cursorGlow.style.top = `${e.clientY}px`;
         });
 
+        // Search functionality
+        const searchInput = document.getElementById('utility-search');
+        const cards = document.querySelectorAll('.utility-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                if (title.includes(term) || desc.includes(term)) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.4s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
         // Initialize Lucide icons
         lucide.createIcons();
     </script>

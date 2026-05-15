@@ -17,3 +17,4 @@ Fix bug 16
 Fix bug 17
 Fix bug 18
 Fix bug 19
+Fix bug 20

@@ -6,3 +6,4 @@ Fix bug 5
 Fix bug 6
 Fix bug 7
 Fix bug 8
+Fix bug 9

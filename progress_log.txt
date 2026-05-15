@@ -4,3 +4,4 @@ Fix bug 3
 Fix bug 4
 Fix bug 5
 Fix bug 6
+Fix bug 7

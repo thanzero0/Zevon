@@ -15,3 +15,4 @@ Fix bug 14
 Fix bug 15
 Fix bug 16
 Fix bug 17
+Fix bug 18

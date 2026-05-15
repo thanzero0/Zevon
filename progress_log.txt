@@ -8,3 +8,4 @@ Fix bug 7
 Fix bug 8
 Fix bug 9
 Fix bug 10
+Fix bug 11
